@@ -15,7 +15,7 @@ public class math extends JFrame implements ActionListener {
         setVisible(true);
         addComponents();
         JOptionPane.showMessageDialog(null, "Welcome to my MathOperator. " +
-                "For math please enter your nums empty to areas! Lets Math! ", "Disclamer", JOptionPane.INFORMATION_MESSAGE);
+                "For math please enter your numbers to empty fields! Lets Math! ", "Disclaimer", JOptionPane.INFORMATION_MESSAGE);
     }
 
     Random rnd = new Random();
@@ -23,9 +23,7 @@ public class math extends JFrame implements ActionListener {
     private JTextField num2;
     private JTextField result;
     private JLabel operator1, operator2;
-    private JButton btn;
     String[] operators = new String[]{"+", "-", "/", "x"};
-
 
     private void addComponents() {
         num1 = new JTextField();
@@ -57,15 +55,14 @@ public class math extends JFrame implements ActionListener {
         result.setFont(new Font("Dialog", Font.PLAIN, 24));
         result.setHorizontalAlignment(SwingConstants.CENTER);
         result.setFocusable(false);
+        result.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         add(result);
 
-
-        btn = new JButton("Math!");
+        JButton btn = new JButton("Math!");
         btn.setBounds(10, 75, 440, 50);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         add(btn);
         btn.addActionListener(this);
-
 
         // my signature / imzam :)
         JLabel imza = new JLabel("made by Berkay ÖCER / 2103013260");
@@ -74,7 +71,6 @@ public class math extends JFrame implements ActionListener {
         add(imza);
 
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -94,10 +90,12 @@ public class math extends JFrame implements ActionListener {
                     result.setText(String.valueOf(Integer.parseInt(num1.getText()) * Integer.parseInt(num2.getText())));
                     break;
             }
-        }catch (Exception exception){
-            exception.printStackTrace();
+        } catch (Exception exception) {
+            System.out.println("Hata: " + exception);
+            result.setText("Error");
+        }
+        finally {
+            System.out.println("İslem yapıldı: " + num1.getText() + operator1.getText() + num2.getText() + operator2.getText() + result.getText());
         }
     }
-
-
 }
